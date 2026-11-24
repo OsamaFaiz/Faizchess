@@ -1,0 +1,131 @@
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700;800&family=Noto+Sans+Symbols+2&display=swap');
+@import 'tailwindcss';
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-surface2: var(--surface-2);
+  --color-panel: var(--panel);
+  --color-ink: var(--ink);
+  --color-muted: var(--muted);
+  --color-line: var(--line);
+  --color-gold: var(--gold);
+  --color-gold-soft: var(--gold-soft);
+  --color-win: #5CC48A;
+  --color-loss: #E46B6B;
+  --font-sans: 'Manrope', system-ui, sans-serif;
+  --font-display: 'Playfair Display', Georgia, serif;
+  --font-piece: 'Noto Sans Symbols 2', 'Segoe UI Symbol', sans-serif;
+}
+
+:root,
+[data-theme='dark'] {
+  --bg: #101319;
+  --surface: #202631;
+  --surface-2: #252b36;
+  --panel: #171a21;
+  --ink: #ffffff;
+  --muted: #aab2bf;
+  --line: rgba(255, 255, 255, 0.07);
+  --gold: #d6a85f;
+  --gold-soft: rgba(214, 168, 95, 0.14);
+  --shadow: 0 10px 30px -12px rgba(0, 0, 0, 0.6);
+}
+[data-theme='light'] {
+  --bg: #f5f3ef;
+  --surface: #ffffff;
+  --surface-2: #ebe7e0;
+  --panel: #e7e2d9;
+  --ink: #171a21;
+  --muted: #5f6673;
+  --line: rgba(23, 26, 33, 0.08);
+  --gold: #b98a3e;
+  --gold-soft: rgba(185, 138, 62, 0.14);
+  --shadow: 0 10px 30px -14px rgba(60, 45, 20, 0.28);
+}
+
+@layer base {
+  html,
+  body,
+  #root {
+    height: 100%;
+  }
+  body {
+    font-family: var(--font-sans);
+    background: #0b0d11;
+    color: var(--ink);
+    -webkit-font-smoothing: antialiased;
+    -webkit-tap-highlight-color: transparent;
+  }
+  button {
+    cursor: pointer;
+  }
+}
+
+@layer utilities {
+  .shadow-card {
+    box-shadow: var(--shadow);
+  }
+  .no-scrollbar {
+    scrollbar-width: none;
+  }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .gold-grad {
+    background: linear-gradient(135deg, #e9c487 0%, #d6a85f 45%, #b07f3a 100%);
+  }
+  .tnum {
+    font-variant-numeric: tabular-nums;
+  }
+}
+
+@keyframes screen-in {
+  from { opacity: 0; transform: translateX(28px); }
+  to { opacity: 1; transform: none; }
+}
+@keyframes screen-back {
+  from { opacity: 0; transform: translateX(-28px); }
+  to { opacity: 1; transform: none; }
+}
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(14px); }
+  to { opacity: 1; transform: none; }
+}
+@keyframes pop {
+  0% { opacity: 0; transform: scale(0.86); }
+  60% { opacity: 1; transform: scale(1.03); }
+  100% { transform: scale(1); }
+}
+@keyframes sheet {
+  from { transform: translateY(100%); }
+  to { transform: none; }
+}
+@keyframes radar {
+  0% { transform: scale(0.3); opacity: 0.7; }
+  100% { transform: scale(1.6); opacity: 0; }
+}
+@keyframes spin-slow { to { transform: rotate(360deg); } }
+@keyframes bar-load {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(250%); }
+}
+@keyframes pulse-ring {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(214, 168, 95, 0.45); }
+  50% { box-shadow: 0 0 0 8px rgba(214, 168, 95, 0); }
+}
+@keyframes shake {
+  0%, 100% { transform: none; }
+  25% { transform: translateX(-5px); }
+  75% { transform: translateX(5px); }
+}
+.anim-in { animation: screen-in 0.32s cubic-bezier(0.2, 0.8, 0.2, 1) both; }
+.anim-back { animation: screen-back 0.32s cubic-bezier(0.2, 0.8, 0.2, 1) both; }
+.anim-fade { animation: fade-up 0.45s cubic-bezier(0.2, 0.8, 0.2, 1) both; }
+.anim-pop { animation: pop 0.42s cubic-bezier(0.2, 0.8, 0.2, 1) both; }
+.anim-sheet { animation: sheet 0.3s cubic-bezier(0.2, 0.8, 0.2, 1) both; }
+.anim-shake { animation: shake 0.3s ease both; }
+.pulse-ring { animation: pulse-ring 1.8s ease-in-out infinite; }
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+}
